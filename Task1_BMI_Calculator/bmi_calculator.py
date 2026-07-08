@@ -7,7 +7,7 @@ Task 1: BMI Calculator
 import ctypes
 import sys
 import tkinter as tk
-from tkinter import ttk, messagebox
+from tkinter import messagebox
 
 # Windows high-DPI screens par blurry/pixelated rendering fix karta hai
 if sys.platform == "win32":
@@ -24,36 +24,35 @@ class BMICalculatorApp:
     def __init__(self, root):
         self.root = root
         self.root.title("BMI Calculator | Oasis Infobyte")
-        self.root.geometry("420x560")
-        self.root.resizable(False, False)
         self.root.configure(bg="#eef2f7")
+        self.root.minsize(400, 520)
 
         self.build_ui()
 
     def build_ui(self):
         # ---------- Header Banner ----------
-        header = tk.Frame(self.root, bg="#2c3e50", height=110)
+        header = tk.Frame(self.root, bg="#2c3e50")
         header.pack(fill="x")
-        header.pack_propagate(False)
 
         tk.Label(
-            header, text="⚖️  BMI Calculator", font=("Segoe UI", 22, "bold"),
+            header, text="BMI Calculator", font=("Segoe UI", 22, "bold"),
             bg="#2c3e50", fg="white"
         ).pack(pady=(20, 0))
 
         tk.Label(
             header, text="Check your Body Mass Index instantly",
             font=("Segoe UI", 10), bg="#2c3e50", fg="#bdc3c7"
-        ).pack()
+        ).pack(pady=(0, 20))
 
-        # ---------- Card Container ----------
-        card = tk.Frame(self.root, bg="white", bd=0)
-        card.place(x=25, y=90, width=370, height=440)
+        # ---------- Card (simple bordered frame, flexible layout) ----------
+        outer_pad = tk.Frame(self.root, bg="#eef2f7")
+        outer_pad.pack(fill="both", expand=True, padx=25, pady=25)
 
-        # subtle shadow effect (a darker frame behind the card)
-        shadow = tk.Frame(self.root, bg="#d0d7e2")
-        shadow.place(x=30, y=95, width=370, height=440)
-        card.lift()
+        card = tk.Frame(
+            outer_pad, bg="white", highlightbackground="#d0d7e2",
+            highlightthickness=1, bd=0
+        )
+        card.pack(fill="both", expand=True)
 
         inner = tk.Frame(card, bg="white")
         inner.pack(fill="both", expand=True, padx=30, pady=30)
@@ -104,21 +103,20 @@ class BMICalculatorApp:
         reset_btn.pack(side="left", ipady=10, padx=(8, 0))
 
         # Result badge area
-        self.result_frame = tk.Frame(inner, bg="#f4f6f8", height=110)
-        self.result_frame.pack(fill="x")
-        self.result_frame.pack_propagate(False)
+        result_frame = tk.Frame(inner, bg="#f4f6f8")
+        result_frame.pack(fill="x")
 
         self.bmi_value_label = tk.Label(
-            self.result_frame, text="--", font=("Segoe UI", 26, "bold"),
+            result_frame, text="--", font=("Segoe UI", 26, "bold"),
             bg="#f4f6f8", fg="#2c3e50"
         )
         self.bmi_value_label.pack(pady=(15, 0))
 
         self.category_label = tk.Label(
-            self.result_frame, text="Enter your details above",
+            result_frame, text="Enter your details above",
             font=("Segoe UI", 11, "bold"), bg="#f4f6f8", fg="#95a5a6"
         )
-        self.category_label.pack()
+        self.category_label.pack(pady=(0, 15))
 
     def calculate_bmi(self):
         try:
