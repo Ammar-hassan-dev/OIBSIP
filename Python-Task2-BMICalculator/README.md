@@ -1,4 +1,4 @@
-# Task 1 - BMI Calculator (GUI)
+# Task 2 - BMI Calculator (GUI)
 
 **Internship:** Oasis Infobyte - Python Programming Internship (OIBSIP)
 **Intern:** Ammar Hassan
