@@ -1,4 +1,4 @@
-# Task 2 - Random Password Generator (GUI)
+# Task 3 - Random Password Generator (GUI)
 
 **Internship:** Oasis Infobyte - Python Programming Internship (OIBSIP)
 **Intern:** Ammar Hassan
